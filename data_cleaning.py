@@ -5,12 +5,12 @@ from pyspark.sql.functions import col, to_timestamp, when
 spark = SparkSession.builder \
     .appName("MusicCleaning") \
     .master("local[*]") \
-    .config("spark.hadoop.fs.defaultFS", "hdfs://192.168.222.128:9000") \
+    .config("spark.hadoop.fs.defaultFS", "hdfs://192.168.***.128:9000") \
     .getOrCreate()
 
 # 读取数据
 df = spark.read.csv(
-    "hdfs://192.168.222.128:9000/music_data/raw_data.csv",
+    "hdfs://192.168.***.128:9000/music_data/raw_data.csv",
     header=True,
     inferSchema=True
 )
@@ -22,8 +22,9 @@ df = df.filter(col("listen_dur") >= 0)
 
 # 保存结果
 df.write.mode("overwrite").csv(
-    "hdfs://192.168.222.128:9000/music_data/cleaned_data.csv",
+    "hdfs://192.168.***.128:9000/music_data/cleaned_data.csv",
     header=True
 )
+
 
 spark.stop()
