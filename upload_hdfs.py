@@ -2,9 +2,9 @@ from hdfs import InsecureClient
 import os
 
 # ==================== 核心配置 ====================
-UBUNTU_IP = "192.168.222.128"
+UBUNTU_IP = "192.168.***.128"
 HDFS_PORT = 50070
-HDFS_USER = "tang0333"
+HDFS_USER = "******"
 LOCAL_CSV_PATH = "/music_project/data/music_log.csv"
 HDFS_TARGET_PATH = "/music_log/raw/music_log.csv"
 
@@ -33,4 +33,5 @@ try:
 
 except Exception as e:
     print(f"❌ 上传失败：{str(e)}")
+
     print("提示：请检查Ubuntu的HDFS是否启动、IP是否正确、50070端口是否放行")
