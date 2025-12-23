@@ -7,13 +7,13 @@ from pyspark.sql.functions import (
 spark = SparkSession.builder \
     .appName("MusicBehaviorAnalysis") \
     .master("local[*]") \
-    .config("spark.hadoop.fs.defaultFS", "hdfs://192.168.222.128:9000") \
+    .config("spark.hadoop.fs.defaultFS", "hdfs://192.168.***.128:9000") \
     .config("spark.sql.repl.eagerEval.enabled", True) \
     .getOrCreate()
 
 # 一：读取 HDFS 上的行为数据
 clean_df = spark.read.csv(
-    path="hdfs://192.168.222.128:9000/music_log/clean",
+    path="hdfs://192.168.***.128:9000/music_log/clean",
     header=True,
     inferSchema=True,
     encoding="utf-8"
@@ -91,7 +91,8 @@ hot_song_analysis.show()
 # 四：分析结果写入HDFS
 style_analysis.write \
     .mode("overwrite") \
-    .csv("hdfs://192.168.222.128:9000/music_log/analysis/style_analysis", header=True)
+    .csv("hdfs://192.168.***.128:9000/music_log/analysis/style_analysis", header=True)
 
 # 五：停止SparkSession
+
 spark.stop()
