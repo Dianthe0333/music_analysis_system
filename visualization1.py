@@ -65,10 +65,10 @@ st.markdown("""
 
 # ===================== 数据库配置 =====================
 DB_CONFIG = {
-    "host": "192.168.222.128",
+    "host": "192.168.***.128",
     "port": 3306,
-    "user": "tang0333",
-    "password": "123456",
+    "user": "******",
+    "password": "******",
     "database": "music_analysis",
     "charset": "utf8mb4"
 }
@@ -588,5 +588,6 @@ elif st.session_state.current_page == "user":
     with col2:
         if st.button("返回首页", use_container_width=True, key="user_center_home_btn"):  # 唯一key
             switch_page("home")
+
 
 st.markdown("</div>", unsafe_allow_html=True)
