@@ -6,11 +6,11 @@ import paramiko
 import pymysql
 
 # ==================== MySQL配置 ====================
-MYSQL_HOST = "192.168.222.128"
+MYSQL_HOST = "192.168.***.128"
 MYSQL_USER = "root"
-MYSQL_PWD = "ivre0333"
+MYSQL_PWD = "******"
 MYSQL_DB = "music_analysis"
-local_path = "D:/PyCharmMiscProject/music_project/data/music_log.csv"
+local_path = "D:/music_project/data/music_log.csv"
 # ==================== 生成用户数据并插入user_info表 ====================
 def generate_and_insert_users(user_num=100):
     """
@@ -133,7 +133,7 @@ def generate_and_insert_play_records(log_num=1000, user_ids=None, song_ids=None)
     )
 
     # 4. 保存到本地CSV
-    local_path = "D:/PyCharmMiscProject/music_project/data/music_log.csv"
+    local_path = "D:/music_project/data/music_log.csv"
     os.makedirs(os.path.dirname(local_path), exist_ok=True)
     log_df.to_csv(local_path, index=False, encoding="utf-8")
     print(f"✅ 播放记录本地保存成功！文件路径：{local_path}")
@@ -171,19 +171,20 @@ def generate_and_insert_play_records(log_num=1000, user_ids=None, song_ids=None)
 generate_and_insert_play_records(log_num=1000, user_ids=user_ids, song_ids=song_ids)
 
 # ==================== 自动上传CSV到Ubuntu ====================
-UBUNTU_IP = "192.168.222.128"
-UBUNTU_USER = "tang0333"
-UBUNTU_PWD = "123456"
-REMOTE_PATH = "/home/tang0333/music_project/data/music_log.csv"
+UBUNTU_IP = "192.168.***.128"
+UBUNTU_USER = "******"
+UBUNTU_PWD = "******"
+REMOTE_PATH = "/home/music_project/data/music_log.csv"
 try:
     ssh = paramiko.SSHClient()
     ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     ssh.connect(UBUNTU_IP, username=UBUNTU_USER, password=UBUNTU_PWD)
-    ssh.exec_command(f"mkdir -p /home/tang0333/music_project/data")
+    ssh.exec_command(f"mkdir -p /home//music_project/data")
     sftp = ssh.open_sftp()
     sftp.put(local_path, REMOTE_PATH)
     sftp.close()
     ssh.close()
     print(f"✅ 上传到Ubuntu成功！远程路径：{REMOTE_PATH}")
 except Exception as e:
+
     print(f"❌ 上传失败：{str(e)}")
